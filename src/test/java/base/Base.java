@@ -6,10 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class Base {
-
-	protected static WebDriver driver;
-	public static Actions action;
+public class Base extends DriverSetup {
 
 	protected static Actions getActions() {
 		return action = new Actions(driver);

@@ -32,4 +32,14 @@ public class Base extends DriverSetup {
 	protected static <T> T newPage(Class<T> testClass, WebDriver driver) {
 		return PageFactory.initElements(driver, testClass);
 	}
+
+	public static String getReportConfigPath(String reportConfigPath){
+		if(reportConfigPath!= null) {
+			return reportConfigPath;
+		}
+		else {
+			throw new RuntimeException("Report Config Path not specified in the Configuration.properties file for the Key:reportConfigPath");
+		}
+	}
+
 }

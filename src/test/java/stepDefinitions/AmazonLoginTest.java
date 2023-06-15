@@ -21,7 +21,7 @@ public class AmazonLoginTest extends Base {
 
 	@Given("Customer is in Amazon Landing page")
 	public void customer_is_in_amazon_landing_page() {
-		String url = Hook.configProperties.getProperty("base_url");
+		String url = Hook.properties.getProperty("base_url");
 		navigateToApplication(url);
 	}
 

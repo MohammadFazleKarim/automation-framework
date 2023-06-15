@@ -15,6 +15,7 @@ public class Hook extends DriverSetup {
 
 	@Before
 	public void setUp() throws IOException {
+		initializeProperties();
 		initDriver();
 	}
 

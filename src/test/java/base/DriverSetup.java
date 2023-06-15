@@ -18,6 +18,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.Duration;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -27,17 +28,23 @@ public class DriverSetup {
     protected static WebDriver driver;
     public static Actions action;
     public static FileInputStream fileInputStream;
-    public static Properties configProperties;
+    public static Properties properties;
     public static DesiredCapabilities caps = new DesiredCapabilities();
 
-	public static void initDriver() throws IOException {
-        String projectPath = System.getProperty("user.dir");
-        fileInputStream = new FileInputStream(projectPath + "/src/test/resources/properties/Configuration.properties");
-        configProperties = new Properties();
-        configProperties.load(fileInputStream);
+    public static void initializeProperties() {
+        try {
+            String projectPath = System.getProperty("user.dir");
+            fileInputStream = new FileInputStream(projectPath + "/src/test/resources/properties/Configuration.properties");
+            properties = new Properties();
+            properties.load(fileInputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+	public static void initDriver() throws IOException {
     	try {
-            if (configProperties.getProperty("browser").contains("chrome")) {
+            if (properties.getProperty("browser").contains("chrome")) {
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--test-type");
@@ -52,7 +59,7 @@ public class DriverSetup {
                 caps.setCapability(ChromeOptions.CAPABILITY, options);
                 driver = new ChromeDriver(options);
             }
-            else if (configProperties.getProperty("browser").contains("firefox")) {
+            else if (properties.getProperty("browser").contains("firefox")) {
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions options = new FirefoxOptions();
                 options.addArguments("-private");
@@ -60,14 +67,14 @@ public class DriverSetup {
                 caps.setCapability("moz:firefoxOptions", options);
                 driver = new FirefoxDriver(options);
             }
-            else if (configProperties.getProperty("browser").contains("edge")) {
+            else if (properties.getProperty("browser").contains("edge")) {
                 WebDriverManager.edgedriver().setup();
                 EdgeOptions options = new EdgeOptions();
                 options.setCapability("InPrivate", true);
                 options.addArguments("--remote-allow-origins=*");
                 driver = new EdgeDriver(options);
             }
-            else if (configProperties.getProperty("browser").contains("ie")) {
+            else if (properties.getProperty("browser").contains("ie")) {
                 WebDriverManager.iedriver().setup();
                 InternetExplorerOptions options = new InternetExplorerOptions().setPageLoadStrategy(PageLoadStrategy.NONE);
                 caps.setCapability(InternetExplorerDriver.FORCE_CREATE_PROCESS, true);

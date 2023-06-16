@@ -10,6 +10,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import utilities.EmailUtils;
 
 public class Hook extends DriverSetup {
 
@@ -22,6 +23,7 @@ public class Hook extends DriverSetup {
 	@After
 	public void tearDown() {
 		quitDriver();
+		EmailUtils.sendMail();
 	}
 
 	@AfterStep

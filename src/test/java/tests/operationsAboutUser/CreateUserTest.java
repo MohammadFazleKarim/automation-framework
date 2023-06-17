@@ -1,15 +1,17 @@
 package tests.operationsAboutUser;
 
+import base.BaseTest;
 import helper.UserTestHelper;
 import org.testng.annotations.Test;
 
-public class CreateUserTest extends UserTestHelper {
+public class CreateUserTest extends BaseTest {
 
     @Test
     private void createAnUser() {
-        buildCreateUserPayload();
-        postCreateUser();
-        validateUserCreated();
+        UserTestHelper userTestHelper = new UserTestHelper();
+        userTestHelper.buildCreateUserPayload();
+        userTestHelper.postCreateUser();
+        userTestHelper.validateUserCreated();
     }
 
 }

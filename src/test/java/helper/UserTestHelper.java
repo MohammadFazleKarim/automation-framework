@@ -42,7 +42,7 @@ public class UserTestHelper extends UserBuilder {
     private Response response = null;
     private static String listOfUserUsingArrayPayload = null;
 
-    protected void buildCreateUserPayload(){
+    public void buildCreateUserPayload(){
         valueOfId = faker.random().nextInt(5, 500);
         valueOfUsername = faker.name().username();
         valueOfFirstName = faker.name().firstName();
@@ -65,11 +65,11 @@ public class UserTestHelper extends UserBuilder {
         createUserJsonObject = new JSONObject(createUserPayload);
     }
 
-    protected void postCreateUser(){
+    public void postCreateUser(){
         response =  RestResourceMethods.post(createUserRequestSpecification(), createUserJsonObject);
     }
 
-    protected void validateUserCreated(){
+    public void validateUserCreated(){
         ValidatableResponse validatableResponse = response.then();
         validatableResponse.statusCode(StatusCodes.CODE_200.code);
 
@@ -96,11 +96,11 @@ public class UserTestHelper extends UserBuilder {
         assertEquals(actualValueOfMessage, Integer.toString(valueOfId));
     }
 
-    protected void getUserInfo(){
+    public void getUserInfo(){
         response =  RestResourceMethods.get(getUserByUsernameRequestSpecification(), "username", valueOfUsername);
     }
 
-    protected void validateUserDetails(){
+    public void validateUserDetails(){
         ValidatableResponse validatableResponse = response.then();
         validatableResponse.statusCode(StatusCodes.CODE_200.code);
 
@@ -139,7 +139,7 @@ public class UserTestHelper extends UserBuilder {
         assertEquals(actualValueOfUserStatus, valueOfUserStatus);
     }
 
-    protected void validateUpdatedUserDetails(){
+    public void validateUpdatedUserDetails(){
         ValidatableResponse validatableResponse = response.then();
 
         // Are there 8 keys such as "id", "username", "firstName", "lastName", "email", "password", "phone" and "userStatus"
@@ -177,7 +177,7 @@ public class UserTestHelper extends UserBuilder {
         assertEquals(actualValueOfUserStatus, valueOfUserStatus);
     }
 
-    protected void buildUpdateUserPayload(){
+    public void buildUpdateUserPayload(){
         updatedValueOfEmail = faker.random().toString() + "@gmail.com";
         updatedValueOfPassword = faker.random().toString();
 
@@ -194,11 +194,11 @@ public class UserTestHelper extends UserBuilder {
         updateUserJsonObject = new JSONObject(payload);
     }
 
-    protected void putUpdateUser(){
+    public void putUpdateUser(){
         response = RestResourceMethods.put(updateUserRequestSpecification(), updateUserJsonObject, "username", valueOfUsername);
     }
 
-    protected void validateUserUpdated(){
+    public void validateUserUpdated(){
         ValidatableResponse validatableResponse = response.then();
         validatableResponse.statusCode(StatusCodes.CODE_200.code);
 
@@ -221,11 +221,11 @@ public class UserTestHelper extends UserBuilder {
         assertEquals(jsonPathEvaluator.get("message"), Integer.toString(valueOfId));
     }
 
-    protected void deleteExistingUser() {
+    public void deleteExistingUser() {
         response = RestResourceMethods.delete(deleteUserRequestSpecification(), "username", valueOfUsername);
     }
 
-    protected void validateUserDeleted() {
+    public void validateUserDeleted() {
         ValidatableResponse validatableResponse = response.then();
         validatableResponse.statusCode(StatusCodes.CODE_200.code);
 
@@ -248,7 +248,7 @@ public class UserTestHelper extends UserBuilder {
         assertEquals(jsonPathEvaluator.get("message"), valueOfUsername);
     }
 
-    protected void buildListOfUsersUsingArrayPayload(){
+    public void buildListOfUsersUsingArrayPayload(){
         valueOfId = faker.random().nextInt(5, 500);
         valueOfUsername = faker.name().username();
         valueOfFirstName = faker.name().firstName();
@@ -315,11 +315,11 @@ public class UserTestHelper extends UserBuilder {
         listOfUserUsingArrayPayload = gson.toJson(arrayOfObjects);
     }
 
-    protected void postCreateListOfUsersUsingArray(){
+    public void postCreateListOfUsersUsingArray(){
         response = RestResourceMethods.post(createListOfUsersUsingArrayRequestSpecification(), listOfUserUsingArrayPayload);
     }
 
-    protected void validateListOfUsersCreated(){
+    public void validateListOfUsersCreated(){
         ValidatableResponse validatableResponse = response.then();
         validatableResponse.statusCode(StatusCodes.CODE_200.code);
 
@@ -342,7 +342,7 @@ public class UserTestHelper extends UserBuilder {
         assertEquals(jsonPathEvaluator.get("message"), "ok");
     }
 
-    protected void postCreateListOfUsersUsingList(){
+    public void postCreateListOfUsersUsingList(){
         response = RestResourceMethods.post(createListOfUsersUsingListRequestSpecification(), listOfUserUsingArrayPayload);
     }
 

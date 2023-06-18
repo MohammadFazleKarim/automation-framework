@@ -15,7 +15,7 @@ import java.util.Properties;
 
 public class EmailUtils {
 
-    public static void sendMail() {
+    public static void sendReportToMail(String fileName) {
         Properties props = new Properties();
         //load a properties file from class path, inside static method
         String projectPath = System.getProperty("user.dir");
@@ -51,7 +51,7 @@ public class EmailUtils {
             msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
             msg.addHeader("format", "flowed");
             msg.addHeader("Content-Transfer-Encoding", "8bit");
-            msg.setFrom(new InternetAddress(fromEmail, "LYNX FLEET-AUTOMATION"));
+            msg.setFrom(new InternetAddress(fromEmail, "CODERS LIVE-AUTOMATION"));
             msg.setReplyTo(InternetAddress.parse(toEmail, false));
             msg.setSubject("Execution Results", "UTF-8");
             msg.setSentDate(new Date());
@@ -61,13 +61,13 @@ public class EmailUtils {
             // Second part is attachment
             // Create the message body part
             BodyPart messageBodyPart = new MimeBodyPart();
-            messageBodyPart.setText("Hello Team, \n \n Please find the execution results.");
+            messageBodyPart.setText("Hello Team, \n \n Please check the execution results.");
             // Create a multipart message for attachment
             Multipart multipart = new MimeMultipart();
             // Set text message part
             multipart.addBodyPart(messageBodyPart);
             messageBodyPart = new MimeBodyPart();
-            String filename = projectPath + props.getProperty("filename");
+            String filename = projectPath + "/target/reports/" + fileName;
             DataSource source = new FileDataSource(filename);
             messageBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName("report.html");

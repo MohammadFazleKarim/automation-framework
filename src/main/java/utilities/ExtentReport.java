@@ -5,14 +5,11 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class ExtentReport {
-
-	private static ExtentSparkReporter sparkReporter;
-	private static ExtentReports extent;
 	
 	public static ExtentReports setupReport() {
-		String path = System.getProperty("user.dir");
-		sparkReporter = new ExtentSparkReporter(path + "\\reportsSection\\ExtentReport.html");
-		extent = new ExtentReports();
+		String projectPath = System.getProperty("user.dir");
+		ExtentSparkReporter sparkReporter = new ExtentSparkReporter(projectPath + "/target/reports/extent-report.html");
+		ExtentReports extent = new ExtentReports();
 		extent.attachReporter(sparkReporter);
 
 		sparkReporter.config().setOfflineMode(true);

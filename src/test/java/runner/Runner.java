@@ -16,7 +16,7 @@ import java.io.File;
         dryRun = false,
         monochrome = true,
 //        tags = "@Regression",
-        plugin = { "html:target/cucumber-reports/report.html" }
+        plugin = { "html:target/reports/cucumber-report.html" }
 )
 
 public class Runner {

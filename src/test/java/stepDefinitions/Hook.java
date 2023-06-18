@@ -23,7 +23,7 @@ public class Hook extends DriverSetup {
 	@After
 	public void tearDown() {
 		quitDriver();
-		EmailUtils.sendMail();
+		EmailUtils.sendReportToMail("cucumber-report.html");
 	}
 
 	@AfterStep
